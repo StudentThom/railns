@@ -1,0 +1,7 @@
+Ideeen:
+    Delete nodes die 1 verbinding hebben die niet kritiek is.
+    Bij inlezen van stations, laat vertices automatisch zien of ze kritiek zijn of niet.
+
+h(n) voor mogelijke A* algoritme
+    h(n) baseren op de real world afstand uit de coordinaten meegeleverd in de csv.
+    De tijd uitrekenen/afstandseenheid door de totale afstand van alle edges uit te rekenen. Deze te delen door de totale tijd van alle trajecten

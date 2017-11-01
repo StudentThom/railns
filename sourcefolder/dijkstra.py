@@ -25,14 +25,21 @@ def dijkstra(aGraph, start, target):
     # (all other nodes are still set to infinity (see make_graph.py))
     start.set_distance(0)
 
+    # Set initial node as current
+    # Create list of unvisited nodes called unvisited list (unvisited_queue)
+    # consisting of all the nodes
     # Put tuple pair (distance, v) into the priority queue
     unvisited_queue = [(v.get_distance(),v) for v in aGraph]
+    # turn unvisited_queue into heap (=  binary trees for which every parent node has a value less than or equal to any of its children)
     heapq.heapify(unvisited_queue)
 
+
     while len(unvisited_queue):
-        # Pops a vertex with the smallest distance
+        # Pops and returns a vertex with the smallest distance
+        # start node is 0, others are initity, so start node is popped and returned
         uv = heapq.heappop(unvisited_queue)
         current = uv[1]
+        # visited is now True not False
         current.set_visited()
 
         #for next in v.adjacent:
@@ -40,6 +47,7 @@ def dijkstra(aGraph, start, target):
             # if visited, skip
             if next.visited:
                 continue
+            # if not visited
             new_dist = current.get_distance() + current.get_weight(next)
 
             if new_dist < next.get_distance():

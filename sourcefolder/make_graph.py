@@ -14,10 +14,10 @@ Initializes a vertex class.
 class Vertex:
 
     # initialise variables
-    def __init__(self, node):
+    def __init__(self, node, critical):
         self.id = node
         self.adjacent = {}
-
+      
     # print initializer, pretty print statement (try printing a vertex!)
     # printing a Vertex('node') "prints node adjacent: []"
     def __str__(self):

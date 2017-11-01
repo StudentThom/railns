@@ -45,7 +45,7 @@ class Vertex:
     # add new neighbour with its weight
     def add_neighbor(self, neighbor, weight=0):
         self.adjacent[neighbor] = weight
-
+    
     # returns list of pointers to neighbouring vertex class objects
     def get_connections(self):
         return self.adjacent.keys()
@@ -57,6 +57,9 @@ class Vertex:
     # retrieves the weight of a vertex
     def get_weight(self, neighbor):
         return self.adjacent[neighbor]
+    
+    def get_critical(self, neighbor_critical):
+        return self.adjacent[neighbor_critical]
 
     # All def below in class Vertex for Dijkstra:
 
@@ -109,6 +112,7 @@ class Graph:
         else:
             return None
 
+
     # add edge
     def add_edge(self, frm, to, cost = 0):
 
@@ -125,6 +129,7 @@ class Graph:
 
         # in Vertex class to, add neighbour Vertex class frm, with weight cost
         self.vert_dict[to].add_neighbor(self.vert_dict[frm], cost)
+        
 
     # returns a list of all vertices
     def get_vertices(self):

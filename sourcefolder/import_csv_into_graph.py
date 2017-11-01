@@ -61,8 +61,9 @@ for v in g:
 for v in g:
     print('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
 
+# count unique critical lines, later placed in make_graph.py as its own function
 count = 0
-vert_dict = {}
+critical_lines = []
 
 # loop through vertices
 for v in g:
@@ -70,13 +71,26 @@ for v in g:
     from_id = v.get_id()
 
     # check if name is in critical_stations
-    if station_name in critical_stations:
+    if from_id in critical_stations:
 
         # get name element of all connections
         for w in v.get_connections():
             to_id = w.get_id()
 
-        print("TODO")
+            # check if name is in critical_stations
+            if to_id in critical_stations:
+                l = [to_id, from_id]
 
-    else:
-        count += 1
+                # for every unique critical line
+                # double check on self made graph, the only double critical line found was:
+                # (Den Haag Centraal, Gouda), (Gouda, Den Haag Centraal)
+                if not l in critical_lines or not l[::-1]:
+                    critical_lines.append([from_id, to_id])
+                    count += 1
+
+            else:
+                # to station is not critical station, but from station is critical
+                count += 1
+
+print(critical_lines)
+print(count)

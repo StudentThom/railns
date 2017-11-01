@@ -36,7 +36,7 @@ def dijkstra(aGraph, start, target):
 
     while len(unvisited_queue):
         # Pops and returns a vertex with the smallest distance
-        # start node is 0, others are initity, so start node is popped and returned
+        # start node is 0, others are infinity, so start node is popped and returned
         uv = heapq.heappop(unvisited_queue)
         current = uv[1]
         # visited is now True not False
@@ -48,10 +48,16 @@ def dijkstra(aGraph, start, target):
             if next.visited:
                 continue
             # if not visited
+            # calculate tentative disance of current and unvisited neighbor
+            # example: current is distance 6, and edge connecting it with neighbor
+            # is 2, than distance is 6+2=8.
             new_dist = current.get_distance() + current.get_weight(next)
 
+            # if newly calculated distance smaller than current assigned value of neighbor
             if new_dist < next.get_distance():
+                # set distance of neighbor to new distance
                 next.set_distance(new_dist)
+                # set previous of neighbor from None to current
                 next.set_previous(current)
                 print 'updated : current = %s next = %s new_dist = %s' \
                         %(current.get_id(), next.get_id(), next.get_distance())

@@ -29,7 +29,7 @@ class Vertex:
         # the value distance determines the order of objects in the
         # priority queue/heapq (see dijkstra.py)
         # Set distance to infinity (= very large number) for all nodes
-        self.distance = sys.maxint
+        self.distance = sys.maxsize
 
         # Mark all nodes unvisited
         self.visited = False
@@ -46,7 +46,7 @@ class Vertex:
     # add new neighbour with its weight
     def add_neighbor(self, neighbor, weight=0):
         self.adjacent[neighbor] = weight
-    
+
     # returns list of pointers to neighbouring vertex class objects
     def get_connections(self):
         return self.adjacent.keys()
@@ -58,7 +58,7 @@ class Vertex:
     # retrieves the weight of a vertex
     def get_weight(self, neighbor):
         return self.adjacent[neighbor]
-    
+
     def get_critical(self, neighbor_critical):
         return self.adjacent[neighbor_critical]
 
@@ -70,9 +70,11 @@ class Vertex:
     def get_distance(self):
         return self.distance
 
+    # to remember previous node in path
     def set_previous(self, prev):
         self.previous = prev
 
+    # to set to visited if visited
     def set_visited(self):
         self.visited = True
 
@@ -128,7 +130,7 @@ class Graph:
 
         # in Vertex class to, add neighbour Vertex class frm, with weight cost
         self.vert_dict[to].add_neighbor(self.vert_dict[frm], cost)
-        
+
 
     # returns a list of all vertices
     def get_vertices(self):

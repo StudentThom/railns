@@ -11,12 +11,29 @@ Vertex class.
 
 Initializes a vertex class.
 """
+# For Dijkstra
+import sys
+
 class Vertex:
 
     # initialise variables
     def __init__(self, node):
         self.id = node
         self.adjacent = {}
+        # For Dijkstra:
+
+        # to keep track of total cost from start node to destination,
+        # the distance (instance) variable is used
+        # contains current total weight of smallest weight path from start to dest
+        # the value distance determines the order of objects in the
+        # priority queue/heapq (see dijkstra.py)
+        # Set distance to infinity (= very large number) for all nodes
+        self.distance = sys.maxint
+
+        # Mark all nodes unvisited
+        self.visited = False
+        # Predecessor
+        self.previous = None
 
     # print initializer, pretty print statement (try printing a vertex!)
     # printing a Vertex('node') "prints node adjacent: []"
@@ -40,6 +57,23 @@ class Vertex:
     # retrieves the weight of a vertex
     def get_weight(self, neighbor):
         return self.adjacent[neighbor]
+
+    # All def below in class Vertex for Dijkstra:
+
+    def set_distance(self, dist):
+        self.distance = dist
+
+    def get_distance(self):
+        return self.distance
+
+    def set_previous(self, prev):
+        self.previous = prev
+
+    def set_visited(self):
+        self.visited = True
+
+    def __str__(self):
+        return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
 
 """
 Graph class.

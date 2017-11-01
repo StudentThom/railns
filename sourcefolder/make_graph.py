@@ -29,10 +29,6 @@ class Vertex:
     def add_neighbor(self, neighbor, weight=0):
         self.adjacent[neighbor] = weight
     
-    # added by thom for boolean critical     
-    def add_critical(self, neighbor_critical, critical=0):
-        self.adjacent[neighbor_critical] = critical
-
     # returns list of pointers to neighbouring vertex class objects
     def get_connections(self):
         return self.adjacent.keys()
@@ -100,9 +96,6 @@ class Graph:
         # in Vertex class to, add neighbour Vertex class frm, with weight cost
         self.vert_dict[to].add_neighbor(self.vert_dict[frm], cost)
         
-        # add boolean critical by thom
-        self.vert_dict[frm].add_critical(self.vert_dict[to])
-        self.vert_dict[to].add_critical(self.vert_dict[frm])
 
     # returns a list of all vertices
     def get_vertices(self):

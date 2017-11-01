@@ -29,7 +29,6 @@ class Vertex:
         # the value distance determines the order of objects in the
         # priority queue/heapq (see dijkstra.py)
         # Set distance to infinity (= very large number) for all nodes
-        # sys.maxint (disused) changed to sys.maxsize
         self.distance = sys.maxsize
 
         # Mark all nodes unvisited
@@ -71,9 +70,11 @@ class Vertex:
     def get_distance(self):
         return self.distance
 
+    # to remember previous node in path
     def set_previous(self, prev):
         self.previous = prev
 
+    # to set to visited if visited
     def set_visited(self):
         self.visited = True
 

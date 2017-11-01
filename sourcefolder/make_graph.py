@@ -11,12 +11,30 @@ Vertex class.
 
 Initializes a vertex class.
 """
+# For Dijkstra
+import sys
+
 class Vertex:
 
     # initialise variables
     def __init__(self, node):
         self.id = node
         self.adjacent = {}
+
+        # For Dijkstra:
+
+        # to keep track of total cost from start node to destination,
+        # the distance (instance) variable is used
+        # contains current total weight of smallest weight path from start to dest
+        # the value distance determines the order of objects in the
+        # priority queue/heapq (see dijkstra.py)
+        # Set distance to infinity (= very large number) for all nodes
+        self.distance = sys.maxint
+
+        # Mark all nodes unvisited
+        self.visited = False
+        # Predecessor
+        self.previous = None
 
     # print initializer, pretty print statement (try printing a vertex!)
     # printing a Vertex('node') "prints node adjacent: []"
@@ -28,7 +46,7 @@ class Vertex:
     # add new neighbour with its weight
     def add_neighbor(self, neighbor, weight=0):
         self.adjacent[neighbor] = weight
-
+    
     # returns list of pointers to neighbouring vertex class objects
     def get_connections(self):
         return self.adjacent.keys()
@@ -40,6 +58,24 @@ class Vertex:
     # retrieves the weight of a vertex
     def get_weight(self, neighbor):
         return self.adjacent[neighbor]
+    
+    def get_critical(self, neighbor_critical):
+        return self.adjacent[neighbor_critical]
+
+    # All def below in class Vertex for Dijkstra:
+
+    def set_distance(self, dist):
+        self.distance = dist
+
+    def get_distance(self):
+        return self.distance
+
+    def set_previous(self, prev):
+        self.previous = prev
+
+    def set_visited(self):
+        self.visited = True
+
 
 """
 Graph class.
@@ -75,6 +111,7 @@ class Graph:
         else:
             return None
 
+
     # add edge
     def add_edge(self, frm, to, cost = 0):
 
@@ -91,6 +128,7 @@ class Graph:
 
         # in Vertex class to, add neighbour Vertex class frm, with weight cost
         self.vert_dict[to].add_neighbor(self.vert_dict[frm], cost)
+        
 
     # returns a list of all vertices
     def get_vertices(self):

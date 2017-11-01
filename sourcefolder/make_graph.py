@@ -20,6 +20,7 @@ class Vertex:
     def __init__(self, node):
         self.id = node
         self.adjacent = {}
+
         # For Dijkstra:
 
         # to keep track of total cost from start node to destination,
@@ -75,8 +76,6 @@ class Vertex:
     def set_visited(self):
         self.visited = True
 
-    def __str__(self):
-        return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
 
 """
 Graph class.

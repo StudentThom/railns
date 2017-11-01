@@ -16,6 +16,10 @@ class Vertex:
 
     def add_neighbor(self, neighbor, weight=0):
         self.adjacent[neighbor] = weight
+    
+    # added by thom for boolean critical     
+    def add_critical(self, neighbor_critical, critical=0):
+        self.adjacent[neighbor_critical] = critical
 
     def get_connections(self):
         return self.adjacent.keys()  
@@ -25,6 +29,9 @@ class Vertex:
 
     def get_weight(self, neighbor):
         return self.adjacent[neighbor]
+    
+    def get_critical(self, neighbor_critical):
+        return self.adjacent[neighbor_critical]
 
 class Graph:
     def __init__(self):
@@ -46,7 +53,7 @@ class Graph:
         else:
             return None
 
-    def add_edge(self, frm, to, cost = 0):
+    def add_edge(self, frm, to, cost = 0, critical = 0):
         if frm not in self.vert_dict:
             self.add_vertex(frm)
         if to not in self.vert_dict:
@@ -54,6 +61,10 @@ class Graph:
 
         self.vert_dict[frm].add_neighbor(self.vert_dict[to], cost)
         self.vert_dict[to].add_neighbor(self.vert_dict[frm], cost)
+        
+        # add boolean critical by thom
+        self.vert_dict[frm].add_critical(self.vert_dict[to], critical)
+        self.vert_dict[to].add_critical(self.vert_dict[frm], critical)
 
     def get_vertices(self):
         return self.vert_dict.keys()
